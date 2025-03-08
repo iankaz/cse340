@@ -1,6 +1,425 @@
-/******* Change Box Model ***************/
-*,
-*:before,
-*:after {
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
+}
+
+/* Base styles */
+body {
+  font-family: Arial, sans-serif;
+  color: #333;
+  background-color: #fff;
+  line-height: 1.6;
+}
+
+#wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #fff;
+}
+
+/* Header styles */
+#top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #fff;
+  border-bottom: 3px solid #4c96d7;
+}
+
+.siteName a {
+  color: #333;
+  text-decoration: none;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+#tools a {
+  color: #4c96d7;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+#tools a:hover {
+  text-decoration: underline;
+}
+
+/* Navigation styles */
+nav {
+  background-color: #3a3a3a;
+  padding: 0.75rem 0;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: flex-start;
+  gap: 2rem;
+  padding: 0 1rem;
+}
+
+nav li {
+  color: #fff;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+}
+
+nav li:hover {
+  background-color: #4c96d7;
+  border-radius: 3px;
+}
+
+/* Hero section */
+#hero {
+  position: relative;
+  margin: 2rem 0;
+}
+
+.hero-content {
+  position: relative;
+}
+
+.vehicle-details {
+  position: absolute;
+  left: 2rem;
+  top: 2rem;
+  background-color: rgba(255,255,255,0.9);
+  padding: 1.5rem;
+  border-radius: 3px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.vehicle-details h2 {
+  color: #4c96d7;
+  margin-bottom: 1rem;
+  font-size: 1.75rem;
+}
+
+.vehicle-details ul {
+  list-style: none;
+  margin: 1.5rem 0;
+  font-size: 1.1rem;
+}
+
+.vehicle-details li {
+  margin-bottom: 0.5rem;
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+}
+
+.cta-button {
+  background-color: #4c96d7;
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 3px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+  background-color: #357abd;
+}
+
+/* Main grid layout */
+.main-grid {
+  display: grid;
+  gap: 2rem;
+  padding: 0 1rem;
+}
+
+/* Reviews section */
+.reviews {
+  background-color: #f8f9fa;
+  padding: 2rem;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.reviews h2 {
+  color: #4c96d7;
+  margin-bottom: 1.5rem;
+}
+
+.reviews ul {
+  list-style: none;
+}
+
+.reviews li {
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+/* Upgrades section */
+.upgrades {
+  background-color: #f8f9fa;
+  padding: 2rem;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.upgrades h2 {
+  color: #4c96d7;
+  margin-bottom: 1.5rem;
+}
+
+.upgrades-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1.5rem;
+}
+
+.upgrade-item {
+  text-align: center;
+}
+
+.upgrade-image {
+  background-color: #fff;
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid #dee2e6;
+  margin-bottom: 0.75rem;
+}
+
+.upgrade-image img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+}
+
+.upgrade-item a {
+  color: #4c96d7;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.upgrade-item a:hover {
+  text-decoration: underline;
+}
+
+/* Footer styles */
+footer {
+  background-color: #3a3a3a;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+
+/* Media queries */
+@media screen and (min-width: 768px) {
+  .main-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+
+  .vehicle-details {
+    max-width: 350px;
+  }
+
+  .upgrades-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  nav ul {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .vehicle-details {
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 1rem;
+  }
+
+  .upgrades-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Small screens (mobile first) */
+@media screen and (max-width: 480px) {
+  .siteName a {
+    font-size: 1.5rem; /* Smaller font for mobile */
+  }
+
+  #hero h1 {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .vehicle-details {
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .vehicle-details h2 {
+    font-size: 1.4rem;
+  }
+
+  .vehicle-details ul {
+    font-size: 1rem;
+  }
+
+  .cta-button {
+    width: 100%; /* Full width button on mobile */
+    text-align: center;
+  }
+
+  .reviews, .upgrades {
+    padding: 1rem;
+  }
+
+  .upgrades-grid {
+    grid-template-columns: 1fr; /* Single column on smallest screens */
+    gap: 1rem;
+  }
+}
+
+/* Medium screens (tablets) */
+@media screen and (min-width: 481px) and (max-width: 767px) {
+  #top-header {
+    padding: 0.75rem;
+  }
+
+  .vehicle-details {
+    max-width: none;
+    width: 90%;
+    margin: 1rem auto;
+  }
+
+  .upgrades-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .main-grid {
+    gap: 2rem;
+  }
+}
+
+/* Large screens (desktops) */
+@media screen and (min-width: 768px) {
+  #wrapper {
+    padding: 0 2rem;
+  }
+
+  nav ul {
+    justify-content: center;
+    gap: 3rem;
+  }
+
+  .hero-content {
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+  }
+
+  .vehicle-details {
+    left: 4rem;
+    padding: 2rem;
+  }
+
+  .main-grid {
+    padding: 0 2rem;
+  }
+}
+
+/* Extra large screens */
+@media screen and (min-width: 1200px) {
+  #wrapper {
+    padding: 0;
+  }
+
+  .hero-content {
+    min-height: 500px;
+  }
+
+  .vehicle-details {
+    left: 6rem;
+    top: 4rem;
+  }
+
+  .main-grid {
+    gap: 4rem;
+  }
+
+  .reviews, .upgrades {
+    padding: 3rem;
+  }
+}
+
+/* Print styles */
+@media print {
+  #top-header, nav, .cta-button {
+    display: none;
+  }
+
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+
+  .vehicle-details {
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 100%;
+    box-shadow: none;
+    border: 1px solid #000;
+  }
+
+  .upgrades-grid {
+    page-break-inside: avoid;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  #top-header {
+    border-bottom-color: #000;
+  }
+
+  .vehicle-details {
+    background: #fff;
+    border: 2px solid #000;
+  }
+
+  .cta-button {
+    background: #000;
+    color: #fff;
+  }
+
+  .reviews, .upgrades {
+    border: 1px solid #000;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
 }
