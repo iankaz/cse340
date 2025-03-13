@@ -392,7 +392,7 @@ footer {
 }
 
 /* High contrast mode */
-@media (prefers-contrast: high) {
+@media (prefers-contrast: more) {
   body {
     background: #fff;
     color: #000;
