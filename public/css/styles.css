@@ -26,20 +26,20 @@ body {
   align-items: center;
   padding: 1rem;
   background-color: #fff;
-  border-bottom: 3px solid #4c96d7;
+  border-bottom: 3px solid #2d5f8a;
 }
 
 .siteName a {
-  color: #333;
+  color: #1a1a1a;
   text-decoration: none;
   font-size: 2rem;
   font-weight: bold;
 }
 
 #tools a {
-  color: #4c96d7;
+  color: #2d5f8a;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 #tools a:hover {
@@ -48,7 +48,7 @@ body {
 
 /* Navigation styles */
 nav {
-  background-color: #3a3a3a;
+  background-color: #2d5f8a;
   padding: 0.75rem 0;
 }
 
@@ -61,14 +61,14 @@ nav ul {
 }
 
 nav li {
-  color: #fff;
+  color: #ffffff;
   cursor: pointer;
   padding: 0.5rem 1rem;
   font-weight: 500;
 }
 
 nav li:hover {
-  background-color: #4c96d7;
+  background-color: #1a4a73;
   border-radius: 3px;
 }
 
@@ -114,19 +114,19 @@ nav li:hover {
 }
 
 .cta-button {
-  background-color: #4c96d7;
-  color: #fff;
+  background-color: #2d5f8a;
+  color: #ffffff;
   border: none;
   padding: 0.75rem 1.5rem;
   border-radius: 3px;
   font-size: 1.1rem;
-  font-weight: bold;
+  font-weight: 600;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
 .cta-button:hover {
-  background-color: #357abd;
+  background-color: #1a4a73;
 }
 
 /* Main grid layout */
@@ -145,7 +145,7 @@ nav li:hover {
 }
 
 .reviews h2 {
-  color: #4c96d7;
+  color: #1a1a1a;
   margin-bottom: 1.5rem;
 }
 
@@ -167,7 +167,7 @@ nav li:hover {
 }
 
 .upgrades h2 {
-  color: #4c96d7;
+  color: #1a1a1a;
   margin-bottom: 1.5rem;
 }
 
@@ -196,9 +196,9 @@ nav li:hover {
 }
 
 .upgrade-item a {
-  color: #4c96d7;
+  color: #2d5f8a;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .upgrade-item a:hover {
@@ -207,8 +207,8 @@ nav li:hover {
 
 /* Footer styles */
 footer {
-  background-color: #3a3a3a;
-  color: #fff;
+  background-color: #2d5f8a;
+  color: #ffffff;
   text-align: center;
   padding: 1rem;
   margin-top: 2rem;
