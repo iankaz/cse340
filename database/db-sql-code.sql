@@ -1,9 +1,3 @@
-CREATE TYPE public.sample AS ENUM
-('first-value', 'second-value', 'third-value');
-
-ALTER TYPE public.sample
-OWNER TO cse340db;
-
 -- Create account_type enum
 CREATE TYPE public.account_type AS ENUM (
     'Client',
@@ -53,8 +47,6 @@ CREATE TABLE IF NOT EXISTS public.account
     account_type account_type NOT NULL DEFAULT 'Client'::account_type,
     CONSTRAINT account_pkey PRIMARY KEY (account_id)
 );
-
-ALTER TYPE account_type ADD VALUE 'Client';
 
 SELECT unnest(enum_range(NULL::account_type));
 
@@ -262,4 +254,3 @@ UPDATE inventory
 SET 
     inv_image = REPLACE(inv_image, '/images/', '/images/vehicles/'),
     inv_thumbnail = REPLACE(inv_thumbnail, '/images/', '/images/vehicles/');
-
