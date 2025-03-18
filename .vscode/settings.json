@@ -8,9 +8,23 @@
             },
             "previewLimit": 50,
             "server": "localhost",
+            "port": 5432,
             "driver": "PostgreSQL",
-            "name": "Render.com",
-            "connectString": "postgresql://cse340_database_7ljh_user:WsBokmnbbSqtX9OCrVRGGYGVPQb4BUWo@dpg-cv54gkofnakc73eobubg-a.oregon-postgres.render.com/cse340_database_7ljh"
+            "name": "postgresql://cse340_rle5_user:n2InwyylqkqStF9cNQUhyZLOsqOdqX3L@dpg-cvckv1dds78s73akfadg-a.oregon-postgres.render.com/cse340_rle5",
+            "database": "cse340_rle5",
+            "username": "cse340_rle5_user"
+        },
+        {
+            "pgOptions": {
+                "ssl": {
+                    "rejectUnauthorized": true
+                }
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "driver": "PostgreSQL",
+            "name": "render.com",
+            "connectString": "postgresql://cse340_rle5_user:n2InwyylqkqStF9cNQUhyZLOsqOdqX3L@dpg-cvckv1dds78s73akfadg-a.oregon-postgres.render.com/cse340_rle5"
         }
     ]
 }
