@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/styles.css"> <!-- Ensure this links to your CSS -->
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <% if (Array.isArray(nav)) { %>
+          <% nav.forEach(link => { %>
+            <li><a href="<%= link.href %>"><%= link.label %></a></li>
+          <% }) %>
+        <% } else { %>
+          <li><a href="/">Home</a></li>
+        <% } %>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <h1><%= title %></h1>
+    <p><%- message %></p> <!-- Unescaped EJS block to display the error message -->
+    <p>Oops! Something went wrong. Maybe we tripped a wire or lost the internet hamsters. Try going back to the <a href="/">Home page</a>, or enjoy this little bit of chaos instead!</p>
+  </main>
+</body>
+</html>
