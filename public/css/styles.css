@@ -48,28 +48,33 @@ body {
 
 /* Navigation styles */
 nav {
-  background-color: #2d5f8a;
-  padding: 0.75rem 0;
+  background-color: #3a3a3a;
+  padding: 0.5em;
 }
 
 nav ul {
-  list-style: none;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
+  align-items: center;
   gap: 2rem;
-  padding: 0 1rem;
 }
 
-nav li {
+nav ul li {
+  display: inline-block;
+}
+
+nav a {
   color: #ffffff;
-  cursor: pointer;
-  padding: 0.5rem 1rem;
-  font-weight: 500;
+  text-decoration: none;
+  font-weight: bold;
 }
 
-nav li:hover {
-  background-color: #1a4a73;
-  border-radius: 3px;
+nav a:hover {
+  color: #ffeb3b;
+  text-decoration: underline;
 }
 
 /* Hero section */
