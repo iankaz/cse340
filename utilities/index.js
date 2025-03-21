@@ -26,18 +26,17 @@ Util.buildClassificationGrid = async function (data) {
   if (data.length > 0) {
     grid = '<ul id="inv-display">';
     data.forEach((vehicle) => {
-      grid += "<li>";
-      grid += `<a href="/inv/detail/${vehicle.inv_id}" title="View ${vehicle.inv_make} ${vehicle.inv_model} details"><img src="${vehicle.inv_thumbnail}" alt="Image of ${vehicle.inv_make} ${vehicle.inv_model}" /></a>`;
+      grid += '<li>';
+      grid += `<a href="/inv/detail/${vehicle.inv_id}" class="vehicle-link" aria-label="View details for ${vehicle.inv_year} ${vehicle.inv_make} ${vehicle.inv_model}"></a>`;
+      grid += `<img src="${vehicle.inv_thumbnail}" alt="${vehicle.inv_year} ${vehicle.inv_make} ${vehicle.inv_model}" />`;
       grid += '<div class="namePrice">';
-      grid += "<hr />";
-      grid += "<h2>";
-      grid += `<a href="/inv/detail/${vehicle.inv_id}" title="View ${vehicle.inv_make} ${vehicle.inv_model} details">${vehicle.inv_make} ${vehicle.inv_model}</a>`;
-      grid += "</h2>";
+      grid += '<hr />';
+      grid += `<h2>${vehicle.inv_make} ${vehicle.inv_model}</h2>`;
       grid += `<span>$${new Intl.NumberFormat("en-US").format(vehicle.inv_price)}</span>`;
-      grid += "</div>";
-      grid += "</li>";
+      grid += '</div>';
+      grid += '</li>';
     });
-    grid += "</ul>";
+    grid += '</ul>';
   } else {
     grid = '<p class="notice">Sorry, no matching vehicles could be found.</p>';
   }

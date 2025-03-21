@@ -92,6 +92,7 @@ nav a:hover {
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
 }
 
 #inv-display li:hover {
@@ -99,11 +100,28 @@ nav a:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+#inv-display a {
+  text-decoration: none;
+  color: inherit;
+}
+
+#inv-display .vehicle-link {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+#inv-display .vehicle-link:focus {
+  outline: 3px solid #4A90E2;
+  outline-offset: 2px;
+}
+
 #inv-display img {
   width: 100%;
   border-bottom: 1px solid #ddd;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+  display: block; /* Remove unwanted spacing */
 }
 
 .namePrice {
@@ -119,7 +137,8 @@ nav a:hover {
 
 .namePrice span {
   font-weight: bold;
-  color: #007bff;
+  color: #0056b3; /* Darker blue for better contrast */
+  font-size: 1.1rem;
 }
 
 /* Hero Section */
