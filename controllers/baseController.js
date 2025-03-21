@@ -1,24 +1,22 @@
-const utilities = require("../utilities/")
-const baseController = {}
+// controllers/baseController.js
+const utilities = require("../utilities/index");
 
-/* *************************
- * Build Home View
- * *************************/
-baseController.buildHome = async function(req, res){
-  const nav = await utilities.getNav()
-  res.render("index", {title: "Home", nav})
-}
+const baseController = {};
 
-/* ****************************************
-* Deliver error 500 view
-* *************************************** */
-baseController.buildError = async function(req, res){
-  const nav = await utilities.getNav()
-  res.render("errors/error", {
-    title: "Server Error",
-    nav,
-    message: "Sorry, the server experienced an error.",
-  })
-}
+/* Existing home builder function */
+baseController.buildHome = async function (req, res, next) {
+  try {
+    const nav = await utilities.getNav();
+    res.render("index", { title: "Home", nav });
+  } catch (error) {
+    next(error);
+  }
+};
 
-module.exports = baseController 
+/* NEW: Intentional Error Trigger for testing 500 errors */
+baseController.throwTestError = async function (req, res, next) {
+  // Create an intentional error to trigger the error middleware
+  next(new Error("Intentional test error triggered."));
+};
+
+module.exports = baseController;

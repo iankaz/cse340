@@ -1,5 +1,5 @@
-<% const d = new Date()
-let year = d.getFullYear() %>
 <footer>
-  <p class="copyright">&copy; <%= year %>, CSE 340 App</p>
+  <p class="copyright">© <%= new Date().getFullYear() %>, CSE 340 App</p>
+  <!-- Link to trigger a 500 error intentionally -->
+  <p><a href="/error">Test Error Route</a></p>
 </footer>

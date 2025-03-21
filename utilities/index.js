@@ -1,63 +1,66 @@
+// utilities/index.js
 const invModel = require("../models/inventory-model");
+
 const Util = {};
 
-/* ************************
- * Constructs the nav HTML unordered list
- ************************ */
+// Build the navigation HTML dynamically
 Util.getNav = async function () {
-  // Fetch classification data from the inventory model
   let data = await invModel.getClassifications();
-  let list = "<ul>"; // Begin the unordered list
-
-  // Add a Home link
+  let list = "<ul>";
   list += '<li><a href="/" title="Home page">Home</a></li>';
-
-  // Dynamically generate links for each classification
   data.rows.forEach((row) => {
     list += "<li>";
     list += `<a href="/inv/type/${row.classification_id}" title="See our inventory of ${row.classification_name} vehicles">${row.classification_name}</a>`;
     list += "</li>";
   });
-
-  list += "</ul>"; // Close the unordered list
-  return list; // Return the constructed HTML
+  list += "</ul>";
+  return list;
 };
 
-/* ****************************************
- * Middleware For Handling Errors
- * Wrap other function in this for 
- * General Error Handling
- **************************************** */
-Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
+// Middleware for wrapping asynchronous route handlers
+Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next);
 
-/* **************************************
- * Build the classification view HTML
- ************************************** */
+// Build classification grid (for listing view)
 Util.buildClassificationGrid = async function (data) {
   let grid;
-
-  // Check if data contains vehicles
   if (data.length > 0) {
-    grid = '<ul id="inv-display">'; // Begin the unordered grid list
+    grid = '<ul id="inv-display">';
     data.forEach((vehicle) => {
       grid += "<li>";
-      grid += `<a href="../../inv/detail/${vehicle.inv_id}" title="View ${vehicle.inv_make} ${vehicle.inv_model} details"><img src="${vehicle.inv_thumbnail}" alt="Image of ${vehicle.inv_make} ${vehicle.inv_model} on CSE Motors" /></a>`;
+      grid += `<a href="/inv/detail/${vehicle.inv_id}" title="View ${vehicle.inv_make} ${vehicle.inv_model} details"><img src="${vehicle.inv_thumbnail}" alt="Image of ${vehicle.inv_make} ${vehicle.inv_model}" /></a>`;
       grid += '<div class="namePrice">';
       grid += "<hr />";
       grid += "<h2>";
-      grid += `<a href="../../inv/detail/${vehicle.inv_id}" title="View ${vehicle.inv_make} ${vehicle.inv_model} details">${vehicle.inv_make} ${vehicle.inv_model}</a>`;
+      grid += `<a href="/inv/detail/${vehicle.inv_id}" title="View ${vehicle.inv_make} ${vehicle.inv_model} details">${vehicle.inv_make} ${vehicle.inv_model}</a>`;
       grid += "</h2>";
       grid += `<span>$${new Intl.NumberFormat("en-US").format(vehicle.inv_price)}</span>`;
       grid += "</div>";
       grid += "</li>";
     });
-    grid += "</ul>"; // Close the unordered list
+    grid += "</ul>";
   } else {
-    // Show a message if no vehicles match
     grid = '<p class="notice">Sorry, no matching vehicles could be found.</p>';
   }
+  return grid;
+};
 
-  return grid; // Return the constructed grid HTML
+// NEW: Build the vehicle detail HTML for the detail view
+Util.buildVehicleDetail = async function (vehicle) {
+  let detail = `<div class="vehicle-detail-container">`;
+  // Image section: Use the full-size image (assumed field name "inv_image")
+  detail += `<div class="vehicle-detail-image">
+               <img src="${vehicle.inv_image}" alt="Image of ${vehicle.inv_make} ${vehicle.inv_model}" />
+             </div>`;
+  // Information section: Display make, model, year, price, mileage, and description
+  detail += `<div class="vehicle-detail-info">
+               <h2>${vehicle.inv_make} ${vehicle.inv_model}</h2>
+               <p><strong>Year:</strong> ${vehicle.inv_year}</p>
+               <p><strong>Price:</strong> $${new Intl.NumberFormat("en-US").format(vehicle.inv_price)}</p>
+               <p><strong>Mileage:</strong> ${new Intl.NumberFormat("en-US").format(vehicle.inv_miles)} miles</p>
+               <p><strong>Description:</strong> ${vehicle.inv_description}</p>
+             </div>`;
+  detail += `</div>`;
+  return detail;
 };
 
 module.exports = Util;
