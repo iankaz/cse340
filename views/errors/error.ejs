@@ -3,27 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Error page - Something went wrong">
   <title><%= title %></title>
   <link rel="stylesheet" href="/css/styles.css"> <!-- Ensure this links to your CSS -->
 </head>
 <body>
-  <header>
-    <nav>
-      <ul>
-        <% if (Array.isArray(nav)) { %>
-          <% nav.forEach(link => { %>
-            <li><a href="<%= link.href %>"><%= link.label %></a></li>
-          <% }) %>
-        <% } else { %>
-          <li><a href="/">Home</a></li>
-        <% } %>
-      </ul>
-    </nav>
-  </header>
-  <main>
-    <h1><%= title %></h1>
-    <p><%- message %></p> <!-- Unescaped EJS block to display the error message -->
-    <p>Oops! Something went wrong. Maybe we tripped a wire or lost the internet hamsters. Try going back to the <a href="/">Home page</a>, or enjoy this little bit of chaos instead!</p>
-  </main>
+  <div id="wrapper">
+    <main role="main">
+      <h1 id="error-heading"><%= title %></h1>
+      <div role="alert" aria-labelledby="error-heading">
+        <p><%- message %></p>
+        <p>Oops! Something went wrong. Maybe we tripped a wire or lost the internet hamsters. Try going back to the <a href="/" aria-label="Return to home page">Home page</a>, or enjoy this little bit of chaos instead!</p>
+      </div>
+    </main>
+  </div>
 </body>
 </html>

@@ -37,7 +37,7 @@ body {
 }
 
 #tools a {
-  color: #2d5f8a;
+  color: #1a4a73; /* Darker blue for better contrast */
   text-decoration: none;
   font-weight: 600;
 }
@@ -164,7 +164,7 @@ nav a:hover {
 }
 
 .cta-button {
-  background-color: #2d5f8a;
+  background-color: #1a4a73; /* Darker blue for better contrast */
   color: #ffffff;
   border: none;
   padding: 0.75rem 1.5rem;
@@ -203,6 +203,28 @@ footer {
   text-align: center;
   padding: 1rem;
   margin-top: 2rem;
+}
+
+/* Add these new styles for the error test link */
+footer a {
+  color: #ffffff;
+  text-decoration: underline;
+  font-weight: bold;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+footer a:hover,
+footer a:focus {
+  background-color: #ffffff;
+  color: #1a4a73;
+  text-decoration: none;
+  outline-color: #ffffff;
 }
 
 /* New: Vehicle Detail Styles */
@@ -268,4 +290,34 @@ footer {
     grid-template-columns: 1fr 1fr;
     gap: 3rem;
   }
+}
+
+/* Improved focus states */
+a:focus,
+button:focus {
+  outline: 3px solid #4A90E2;
+  outline-offset: 2px;
+}
+
+/* Skip to main content link for keyboard users */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #1a4a73;
+  color: white;
+  padding: 8px;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Improved form field focus states */
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 3px solid #4A90E2;
+  outline-offset: 2px;
 }
