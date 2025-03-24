@@ -437,3 +437,134 @@ textarea:focus {
   color: #6db4ff;
   text-decoration: underline;
 }
+
+/* New Registration styles */
+.register-container {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e1e1e1;
+  position: relative;
+  overflow: hidden;
+}
+
+.register-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, #00c6ff, #0072ff);
+}
+
+.register-container h1 {
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2.2rem;
+  font-weight: 600;
+}
+
+.register-container .form-group {
+  margin-bottom: 1.8rem;
+}
+
+.register-container .form-group label {
+  display: block;
+  margin-bottom: 0.7rem;
+  color: #34495e;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.register-container .form-group input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  color: #2c3e50;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.register-container .form-group input:focus {
+  outline: none;
+  border-color: #0072ff;
+  background-color: #fff;
+  box-shadow: 0 0 0 4px rgba(0, 114, 255, 0.1);
+}
+
+.register-container .form-group label:has(+ input:focus) {
+  color: #0072ff;
+}
+
+.register-container .password-requirements {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-left: 4px solid #0072ff;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  color: #5a6c7d;
+}
+
+.register-container .password-requirements ul {
+  margin: 0.5rem 0 0 1.2rem;
+  list-style-type: none;
+}
+
+.register-container .password-requirements li {
+  margin: 0.4rem 0;
+  position: relative;
+}
+
+.register-container .password-requirements li::before {
+  content: '•';
+  color: #0072ff;
+  font-weight: bold;
+  position: absolute;
+  left: -1rem;
+}
+
+.register-container button[type="submit"] {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(90deg, #00c6ff, #0072ff);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.register-container button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 114, 255, 0.3);
+}
+
+.register-container button[type="submit"]:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .register-container {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .register-container h1 {
+    font-size: 1.8rem;
+  }
+}
