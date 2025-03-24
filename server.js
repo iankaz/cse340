@@ -8,6 +8,7 @@ const static = require("./routes/static");
 const expressLayouts = require("express-ejs-layouts");
 const baseController = require("./controllers/baseController");
 const inventoryRoute = require("./routes/inventoryRoute");
+const accountRoute = require("./routes/accountRoute");
 const utilities = require("./utilities/index");
 
 /* ***********************
@@ -51,6 +52,9 @@ app.get("/", utilities.handleErrors(baseController.buildHome));
 
 // Inventory routes (including detail view)
 app.use("/inv", inventoryRoute);
+
+// Account routes
+app.use("/account", accountRoute);
 
 // Catch-all 404 route (must be last)
 app.use(async (req, res, next) => {
