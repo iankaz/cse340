@@ -83,7 +83,37 @@ app.use(async (err, req, res, next) => {
 const port = process.env.PORT;
 const host = process.env.HOST;
 
+// Server startup with port handling
+const startServer = () => {
+  const basePort = process.env.PORT || 5500;
+  let currentPort = basePort;
+  const maxAttempts = 10;
+
+  const tryPort = (attempt) => {
+    if (attempt >= maxAttempts) {
+      console.error('Could not find an available port after', maxAttempts, 'attempts');
+      process.exit(1);
+    }
+
+    const server = app.listen(currentPort)
+      .on('listening', () => {
+        console.log(`Server running on ${host}:${currentPort}`);
+      })
+      .on('error', (err) => {
+        if (err.code === 'EADDRINUSE') {
+          console.log(`Port ${currentPort} is busy, trying ${currentPort + 1}`);
+          currentPort++;
+          server.close();
+          tryPort(attempt + 1);
+        } else {
+          console.error('Server error:', err);
+          process.exit(1);
+        }
+      });
+  };
+
+  tryPort(0);
+};
+
 // Start the server
-app.listen(port, () => {
-  console.log(`app listening on ${host}:${port}`);
-});
+startServer();

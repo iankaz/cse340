@@ -208,6 +208,61 @@ nav a:hover {
   margin: 1rem 0;
 }
 
+/* Enhanced Error Message Styling */
+.notice {
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 8px;
+  list-style-type: none;
+  background-color: #fff3f3;
+  border-left: 4px solid #dc3545;
+  box-shadow: 0 2px 4px rgba(220, 53, 69, 0.1);
+}
+
+.notice li {
+  color: #dc3545;
+  padding: 0.5rem 0;
+  font-size: 0.95rem;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.notice li:before {
+  content: '!';
+  position: absolute;
+  left: 0;
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.notice li:not(:last-child) {
+  border-bottom: 1px solid rgba(220, 53, 69, 0.1);
+}
+
+/* Enhanced Validation Error Display */
+.notice {
+  background-color: #fff3f3;
+  border-left: 4px solid #dc3545;
+  margin: 1rem 0;
+  padding: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.notice li {
+  color: #dc3545;
+  margin-bottom: 0.5rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.notice li::before {
+  content: "⚠️";
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
 /* Main Grid Layout */
 .main-grid {
   display: grid;
@@ -558,6 +613,39 @@ textarea:focus {
   transform: translateY(0);
 }
 
+/* Form Validation Styles */
+input:required:invalid,
+input:focus:invalid {
+  border-color: #ff4444;
+  background-color: #ffeeee;
+  box-shadow: 0 0 3px rgba(255, 0, 0, 0.2);
+}
+
+input:required:valid {
+  border-color: #44aa44;
+  background-color: #eeffee;
+  box-shadow: 0 0 3px rgba(0, 255, 0, 0.2);
+}
+
+.password-requirements {
+  background-color: #f8f9fa;
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 5px;
+  font-size: 0.85em;
+  border-left: 3px solid #0072ff;
+}
+
+.password-requirements ul {
+  margin: 5px 0 0 20px;
+  padding: 0;
+}
+
+.password-requirements li {
+  margin: 3px 0;
+  color: #666;
+}
+
 @media (max-width: 768px) {
   .register-container {
     margin: 1rem;
@@ -567,4 +655,15 @@ textarea:focus {
   .register-container h1 {
     font-size: 1.8rem;
   }
+}
+
+/* Form Input Validation States */
+input:required:invalid {
+  border-color: #dc3545;
+  background-color: #fff3f3;
+}
+
+input:required:valid {
+  border-color: #28a745;
+  background-color: #f4fdf6;
 }
