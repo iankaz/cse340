@@ -667,3 +667,44 @@ input:required:valid {
   border-color: #28a745;
   background-color: #f4fdf6;
 }
+
+/* Form Input Styling */
+.form-group input,
+.form-group textarea,
+.form-group select {
+  background-color: #f8f9fa;
+  color: #212529;
+  border: 1px solid #ced4da;
+  padding: 8px;
+  font-size: 16px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  background-color: #e9ecef;
+  color: #000;
+  border-color: #86b7fe;
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+/* Feedback styling */
+.feedback {
+  display: block;
+  margin-top: 4px;
+  font-size: 14px;
+}
+
+/* Input requirement hints */
+.input-requirements {
+  color: #6c757d;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+/* Classification dropdown specific styling */
+#classificationList {
+  background-color: #f8f9fa;
+  color: #212529;
+}

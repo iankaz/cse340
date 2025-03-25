@@ -1,0 +1,52 @@
+<%- messages() %>
+<% if (errors) { %>
+  <ul class="notice">
+    <% errors.array().forEach(error => { %>
+      <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<div class="add-classification-container">
+  <h1><%= title %></h1>
+
+  <p class="notice">Classification name cannot contain spaces or special characters.</p>
+
+  <form id="addClassificationForm" action="/inv/add-classification" method="post">
+    <div class="form-group">
+      <label for="classification_name">Classification Name:</label>
+      <input 
+        type="text" 
+        id="classificationName" 
+        name="classification_name" 
+        required 
+        pattern="^[a-zA-Z0-9]+$"
+        value="<%= locals.classification_name %>"
+        oninput="showFeedback(this)"
+      >
+      <span id="classification-feedback" class="feedback" aria-live="polite"></span>
+      <span class="input-requirements">Only letters and numbers allowed</span>
+    </div>
+    <div class="form-group">
+      <button type="submit">Add Classification</button>
+    </div>
+  </form>
+</div>
+
+<script>
+  function showFeedback(input) {
+    const feedback = document.getElementById('classification-feedback')
+    const value = input.value
+    const invalidChars = value.replace(/[a-zA-Z0-9]/g, '')
+    
+    if (invalidChars) {
+      feedback.textContent = `Invalid characters detected: ${invalidChars}`
+      feedback.style.color = 'red'
+    } else if (value) {
+      feedback.textContent = `Valid input: ${value}`
+      feedback.style.color = 'green'
+    } else {
+      feedback.textContent = ''
+    }
+  }
+</script>

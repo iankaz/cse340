@@ -63,9 +63,78 @@ async function getInventoryById(inv_id) {
   }
 }
 
+/* **********************
+ *   Add New Classification
+ * ********************* */
+async function addClassification(classification_name) {
+  try {
+    const sql = "INSERT INTO classification (classification_name) VALUES ($1) RETURNING *"
+    const result = await pool.query(sql, [classification_name])
+    return result.rowCount > 0
+  } catch (error) {
+    console.error("addClassification error " + error)
+    return false
+  }
+}
+
+/* **********************
+ *   Add New Inventory Item
+ * ********************* */
+async function addInventory(inventoryData) {
+  try {
+    // First check if vehicle with same make and model exists
+    const checkSql = `
+      SELECT * FROM inventory 
+      WHERE inv_make = $1 
+      AND inv_model = $2
+      AND classification_id = $3`
+    
+    const checkResult = await pool.query(checkSql, [
+      inventoryData.inv_make,
+      inventoryData.inv_model,
+      inventoryData.classification_id
+    ])
+
+    if (checkResult.rowCount > 0) {
+      return "duplicate"
+    }
+
+    const sql = `
+      INSERT INTO inventory (
+        classification_id, inv_make, inv_model, 
+        inv_year, inv_description, inv_image, 
+        inv_thumbnail, inv_price, inv_miles, 
+        inv_color
+      )
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+      RETURNING *`
+    
+    const values = [
+      inventoryData.classification_id,
+      inventoryData.inv_make,
+      inventoryData.inv_model,
+      inventoryData.inv_year,
+      inventoryData.inv_description,
+      inventoryData.inv_image,
+      inventoryData.inv_thumbnail,
+      inventoryData.inv_price,
+      inventoryData.inv_miles,
+      inventoryData.inv_color
+    ]
+
+    const result = await pool.query(sql, values)
+    return result.rowCount > 0
+  } catch (error) {
+    console.error("addInventory error " + error)
+    return false
+  }
+}
+
 module.exports = {
   getClassifications,
   getInventory,
   getInventoryByClassificationId,
   getInventoryById,
+  addClassification,
+  addInventory,
 };
