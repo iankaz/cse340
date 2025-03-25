@@ -1,11 +1,19 @@
 <%- messages() %>
+<% if (errors) { %>
+  <ul class="notice">
+    <% errors.array().forEach(error => { %>
+      <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+<% } %>
+
 <div class="login-container">
   <h1><%= title %></h1>
 
   <form id="loginForm" action="/account/login" method="post">
     <div class="form-group">
       <label for="account_email">Email:</label>
-      <input type="email" id="account_email" name="account_email" required placeholder="Enter your email">
+      <input type="email" id="account_email" name="account_email" required value="<%= locals.account_email %>">
     </div>
     <div class="form-group">
       <label for="account_password">Password:</label>
@@ -14,17 +22,7 @@
         id="account_password" 
         name="account_password" 
         required 
-        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
       >
-      <div class="password-requirements">
-        Password must be:
-        <ul>
-          <li>at least 12 characters</li>
-          <li>include 1 capital letter</li>
-          <li>include 1 number</li>
-          <li>include 1 special character</li>
-        </ul>
-      </div>
     </div>
     <div class="form-group">
       <button type="submit">Login</button>

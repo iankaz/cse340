@@ -53,7 +53,7 @@ async function registerAccount(req, res) {
     return
   }
 
-  const regResult = await accountModel.registerAccount(
+  const regResult = await accountModel.accountRegister(
     account_firstname,
     account_lastname,
     account_email,
