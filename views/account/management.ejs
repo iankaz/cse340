@@ -1,0 +1,14 @@
+<%- messages() %>
+
+<% if (errors) { %>
+  <ul class="notice">
+    <% errors.array().forEach(error => { %>
+      <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<div class="management-container">
+  <h1>Account Management</h1>
+  <p>You're logged in.</p>
+</div>

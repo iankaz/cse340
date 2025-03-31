@@ -1,4 +1,5 @@
 <%- messages() %>
+
 <% if (errors) { %>
   <ul class="notice">
     <% errors.array().forEach(error => { %>
@@ -8,28 +9,21 @@
 <% } %>
 
 <div class="login-container">
-  <h1><%= title %></h1>
-
+  <h1>Login</h1>
   <form id="loginForm" action="/account/login" method="post">
     <div class="form-group">
-      <label for="client_email">Email:</label>
-      <input type="email" id="clientEmail" name="client_email" required value="<%= locals.client_email %>">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="account_email" required>
     </div>
     <div class="form-group">
-      <label for="client_password">Password:</label>
-      <input 
-        type="password" 
-        id="clientPassword" 
-        name="client_password" 
-        required 
-        value="<%= locals.client_password %>"
-      >
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="account_password" required>
     </div>
     <div class="form-group">
       <button type="submit">Login</button>
     </div>
-    <div class="register-link">
-      <p>No account? <a href="/account/register">Register</a></p>
-    </div>
   </form>
+  <div class="register-link">
+    <p>No account? <a href="/account/register">Sign-up</a></p>
+  </div>
 </div>
