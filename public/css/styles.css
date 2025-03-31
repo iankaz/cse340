@@ -711,3 +711,53 @@ input:required:valid {
 .cta-button:hover {
   background-color: #1a4a73; /* Darker shade on hover */
 }
+
+/* Inventory Management Styles */
+.management-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+#classificationList {
+  width: 200px;
+  padding: 8px;
+  margin: 15px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#inventoryDisplay {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+#inventoryDisplay thead {
+  background-color: #333;
+  color: white;
+}
+
+#inventoryDisplay th,
+#inventoryDisplay td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+#inventoryDisplay tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#inventoryDisplay tr:hover {
+  background-color: #ddd;
+}
+
+#inventoryDisplay a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+#inventoryDisplay a:hover {
+  text-decoration: underline;
+}
