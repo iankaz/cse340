@@ -1,5 +1,6 @@
 const { body, validationResult } = require("express-validator")
 const utilities = require(".")
+const invModel = require("../models/inventory-model")
 
 const validate = {}
 
@@ -46,6 +47,52 @@ validate.checkInventoryData = async (req, res, next) => {
       nav: await utilities.getNav(),
       classificationList,
       ...req.body // Makes form sticky
+    })
+    return
+  }
+  next()
+}
+
+/* ******************************
+ * Check data and return errors or continue to edit inventory item
+ * ***************************** */
+validate.checkUpdateData = async (req, res, next) => {
+  const { 
+    inv_id,
+    inv_make, 
+    inv_model, 
+    inv_year, 
+    inv_description, 
+    inv_image, 
+    inv_thumbnail, 
+    inv_price, 
+    inv_miles, 
+    inv_color, 
+    classification_id 
+  } = req.body
+
+  let errors = []
+  errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav()
+    const itemData = await invModel.getInventoryById(inv_id)
+    const classificationSelect = await utilities.buildClassificationList(classification_id)
+    res.render("inventory/edit-inventory", {
+      title: "Edit " + itemData.inv_make + " " + itemData.inv_model,
+      nav,
+      classificationSelect,
+      errors: errors.array(),
+      inv_id,
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
+      inv_color,
+      classification_id
     })
     return
   }
