@@ -12,6 +12,7 @@ const accountRoute = require("./routes/accountRoute");
 const utilities = require("./utilities/index");
 const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser")
+const authMiddleware = require('./middleware/authMiddleware');
 
 /* ***********************
  * Middleware
@@ -64,6 +65,11 @@ app.use("/inv", inventoryRoute);
 
 // Account routes
 app.use("/account", accountRoute);
+
+// Protected routes example
+app.get("/protected", authMiddleware.isAuthenticated, (req, res) => {
+  res.render("protected", { title: "Protected Page" });
+});
 
 // Catch-all 404 route (must be last)
 app.use(async (req, res, next) => {

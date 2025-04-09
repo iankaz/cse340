@@ -109,16 +109,36 @@ async function accountLogin(req, res) {
 
   try {
     if (await bcrypt.compare(account_password, accountData.account_password)) {
-      delete accountData.account_password
-      const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
+      // Remove sensitive data before creating token
+      const tokenData = {
+        account_id: accountData.account_id,
+        account_type: accountData.account_type,
+        account_firstname: accountData.account_firstname,
+        account_lastname: accountData.account_lastname,
+        account_email: accountData.account_email
+      }
+      
+      // Create JWT token
+      const accessToken = jwt.sign(
+        tokenData,
+        process.env.ACCESS_TOKEN_SECRET,
+        { expiresIn: '1h' }
+      )
+
+      // Set cookie with token
       res.cookie("jwt", accessToken, { 
         httpOnly: true, 
         secure: process.env.NODE_ENV === 'production',
-        maxAge: 3600 * 1000 
+        maxAge: 3600 * 1000, // 1 hour
+        sameSite: 'strict'
       })
+
+      // Set success message and redirect
+      req.flash("notice", `Welcome back, ${accountData.account_firstname}!`)
       return res.redirect("/account/")
     }
   } catch (error) {
+    console.error('Login error:', error)
     return res.status(403).render("account/login", {
       title: "Login",
       nav,
@@ -127,6 +147,7 @@ async function accountLogin(req, res) {
     })
   }
   
+  // If we get here, password didn't match
   req.flash("notice", "Please check your credentials and try again.")
   res.status(400).render("account/login", {
     title: "Login",

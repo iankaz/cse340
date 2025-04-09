@@ -21,7 +21,10 @@ if (process.env.NODE_ENV === "development") {
     },
   };
 } else {
-  pool = new Pool({ connectionString: process.env.DATABASE_URL });
+  pool = new Pool({ 
+    connectionString: process.env.DATABASE_URL,
+    ssl: { rejectUnauthorized: false }
+  });
   module.exports = pool;
 }
 
@@ -168,6 +171,20 @@ async function updateInventory(
   }
 }
 
+/* ***************************
+ *  Delete Inventory Item
+ * ************************** */
+async function deleteInventory(inv_id) {
+  try {
+    const sql = 'DELETE FROM public.inventory WHERE inv_id = $1'
+    const data = await pool.query(sql, [inv_id])
+    return data.rowCount > 0
+  } catch (error) {
+    console.error("deleteInventory error: " + error)
+    return false
+  }
+}
+
 module.exports = {
   getClassifications,
   getInventory,
@@ -176,4 +193,5 @@ module.exports = {
   addClassification,
   addInventory,
   updateInventory,
+  deleteInventory,
 };
