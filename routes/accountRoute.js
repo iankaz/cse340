@@ -3,6 +3,7 @@ const router = express.Router()
 const utilities = require("../utilities")
 const accountController = require("../controllers/accountController")
 const regValidate = require('../utilities/account-validation')
+const accountValidation = require("../middleware/accountValidation")
 
 // Route to build account management view
 router.get("/", 
@@ -30,6 +31,31 @@ router.post(
   regValidate.loginRules(),
   regValidate.checkLoginData,
   utilities.handleErrors(accountController.accountLogin)
+)
+
+// GET route for account update view
+router.get("/update/:account_id", 
+  utilities.checkJWTToken,
+  utilities.handleErrors(accountController.buildUpdateView)
+)
+
+// POST route for account update
+router.post("/update",
+  utilities.checkJWTToken,
+  accountValidation.validateUpdateData,
+  utilities.handleErrors(accountController.updateAccount)
+)
+
+// POST route for password update
+router.post("/update-password",
+  utilities.checkJWTToken,
+  accountValidation.validatePasswordUpdate,
+  utilities.handleErrors(accountController.updatePassword)
+)
+
+// Route to process logout
+router.get("/logout",
+  utilities.handleErrors(accountController.logout)
 )
 
 module.exports = router

@@ -5,63 +5,71 @@ const invController = require("../controllers/invController");
 const validationRules = require("../utilities/classification-validation");
 const inventoryValidation = require("../utilities/inventory-validation");
 const utilities = require("../utilities");
+const { checkInventoryAuth } = require("../middleware/inventoryAuth");
 
-// Route for inventory by classification view
+// Public routes (no authorization required)
 router.get("/type/:classificationId", invController.buildByClassificationId);
-
-// Route for inventory detail view
 router.get("/detail/:inv_id", invController.buildDetail);
 
-// Route to inventory management view
-router.get("/", utilities.handleErrors(invController.buildManagementView))  // Changed from getManagement to buildManagementView
+// Protected routes (require Employee or Admin authorization)
+router.get("/", 
+  checkInventoryAuth,
+  utilities.handleErrors(invController.buildManagementView)
+);
 
-// Route to display the add classification form
-router.get("/add-classification", utilities.handleErrors(invController.getAddClassification));
+router.get("/add-classification", 
+  checkInventoryAuth,
+  utilities.handleErrors(invController.getAddClassification)
+);
 
-// Route to handle the classification form submission
 router.post(
   "/add-classification",
+  checkInventoryAuth,
   validationRules.classificationRules(),
   validationRules.checkClassificationData,
   utilities.handleErrors(invController.addClassification)
 );
 
-// Route to display add inventory form
-router.get("/add-inventory", utilities.handleErrors(invController.getAddInventory))
+router.get("/add-inventory", 
+  checkInventoryAuth,
+  utilities.handleErrors(invController.getAddInventory)
+);
 
-// Route to process add inventory
 router.post(
   "/add-inventory",
+  checkInventoryAuth,
   inventoryValidation.inventoryRules(),
   inventoryValidation.checkInventoryData,
   utilities.handleErrors(invController.addInventory)
-)
+);
 
-// Route to get inventory JSON data
-router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+router.get("/getInventory/:classification_id", 
+  checkInventoryAuth,
+  utilities.handleErrors(invController.getInventoryJSON)
+);
 
-// Route to build edit inventory view
 router.get("/edit/:invId", 
+  checkInventoryAuth,
   utilities.handleErrors(invController.buildEditInventoryView)
-)
+);
 
-// Route to process the inventory update
 router.post(
   "/update/",
+  checkInventoryAuth,
   inventoryValidation.inventoryRules(),
   inventoryValidation.checkUpdateData,
   utilities.handleErrors(invController.updateInventory)
-)
+);
 
-// Route to build delete confirmation view
 router.get("/delete/:invId", 
+  checkInventoryAuth,
   utilities.handleErrors(invController.buildDeleteConfirmationView)
-)
+);
 
-// Route to process the inventory deletion
 router.post(
   "/delete/",
+  checkInventoryAuth,
   utilities.handleErrors(invController.deleteInventory)
-)
+);
 
 module.exports = router;

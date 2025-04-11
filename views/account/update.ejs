@@ -1,0 +1,150 @@
+<%- messages() %>
+
+<% if (errors) { %>
+  <ul class="notice">
+    <% errors.forEach(error => { %>
+      <li><%= error %></li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<h1><%= title %></h1>
+
+<div class="update-forms">
+  <!-- Account Update Form -->
+  <form id="accountUpdateForm" action="/account/update" method="post">
+    <fieldset>
+      <legend>Account Update</legend>
+      
+      <div class="form-group">
+        <label for="account_firstname">First Name:</label>
+        <input 
+          type="text" 
+          name="account_firstname" 
+          id="account_firstname" 
+          required
+          value="<%= locals.account_firstname || '' %>"
+          pattern="[A-Za-z\s]{1,}"
+          title="First name must contain only letters and spaces"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="account_lastname">Last Name:</label>
+        <input 
+          type="text" 
+          name="account_lastname" 
+          id="account_lastname" 
+          required
+          value="<%= locals.account_lastname || '' %>"
+          pattern="[A-Za-z\s]{1,}"
+          title="Last name must contain only letters and spaces"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="account_email">Email:</label>
+        <input 
+          type="email" 
+          name="account_email" 
+          id="account_email" 
+          required
+          value="<%= locals.account_email || '' %>"
+        >
+      </div>
+
+      <input type="hidden" name="account_id" value="<%= locals.account_id %>">
+      
+      <button type="submit" class="btn btn-primary">Update Account</button>
+    </fieldset>
+  </form>
+
+  <!-- Password Change Form -->
+  <form id="passwordChangeForm" action="/account/update-password" method="post">
+    <fieldset>
+      <legend>Change Password</legend>
+      
+      <div class="form-group">
+        <label for="account_password">New Password:</label>
+        <input 
+          type="password" 
+          name="account_password" 
+          id="account_password" 
+          required
+          pattern="(?=^.{12,}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])(?!.*\s).*$"
+          title="Password must be at least 12 characters and contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character"
+        >
+      </div>
+
+      <div class="password-requirements">
+        <p>Password Requirements:</p>
+        <ul>
+          <li>At least 12 characters long</li>
+          <li>At least 1 uppercase letter</li>
+          <li>At least 1 lowercase letter</li>
+          <li>At least 1 number</li>
+          <li>At least 1 special character (!@#$%^&*)</li>
+          <li>No spaces allowed</li>
+        </ul>
+      </div>
+
+      <input type="hidden" name="account_id" value="<%= locals.account_id %>">
+      
+      <button type="submit" class="btn btn-primary">Change Password</button>
+    </fieldset>
+  </form>
+</div>
+
+<style>
+  .update-forms {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  fieldset {
+    border: 1px solid #ddd;
+    padding: 1.5rem;
+    border-radius: 5px;
+  }
+
+  legend {
+    font-weight: bold;
+    padding: 0 0.5rem;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+
+  .password-requirements {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 4px;
+    margin: 1rem 0;
+  }
+
+  .password-requirements ul {
+    margin: 0.5rem 0 0 1.5rem;
+  }
+
+  button {
+    margin-top: 1rem;
+  }
+</style> 

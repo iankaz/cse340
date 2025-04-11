@@ -157,4 +157,22 @@ async function accountLogin(req, res) {
   })
 }
 
-module.exports = { buildLogin, buildRegister, buildManagement, registerAccount, accountLogin }
+/* ***************************
+ * Process logout request
+ * ************************** */
+async function logout(req, res, next) {
+  try {
+    // Clear the JWT token cookie
+    res.clearCookie("jwt")
+    
+    // Set flash message
+    req.flash("notice", "You have been successfully logged out.")
+    
+    // Redirect to home view
+    res.redirect("/")
+  } catch (error) {
+    next(error)
+  }
+}
+
+module.exports = { buildLogin, buildRegister, buildManagement, registerAccount, accountLogin, logout }
