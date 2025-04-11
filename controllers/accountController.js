@@ -41,6 +41,34 @@ async function buildManagement(req, res, next) {
 }
 
 /* ****************************************
+ * Deliver account update view
+ * *************************************** */
+async function buildUpdateView(req, res, next) {
+  try {
+    let nav = await utilities.getNav()
+    const account_id = req.params.account_id
+    const accountData = await accountModel.getAccountById(account_id)
+    
+    if (!accountData) {
+      req.flash("notice", "Account not found")
+      return res.redirect("/account/")
+    }
+
+    res.render("account/update", {
+      title: "Update Account",
+      nav,
+      account_firstname: accountData.account_firstname,
+      account_lastname: accountData.account_lastname,
+      account_email: accountData.account_email,
+      account_id: accountData.account_id,
+      errors: null
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
+/* ****************************************
 *  Process Registration
 * *************************************** */
 async function registerAccount(req, res) {
@@ -175,4 +203,4 @@ async function logout(req, res, next) {
   }
 }
 
-module.exports = { buildLogin, buildRegister, buildManagement, registerAccount, accountLogin, logout }
+module.exports = { buildLogin, buildRegister, buildManagement, buildUpdateView, registerAccount, accountLogin, logout }
