@@ -203,4 +203,29 @@ async function logout(req, res, next) {
   }
 }
 
-module.exports = { buildLogin, buildRegister, buildManagement, buildUpdateView, registerAccount, accountLogin, logout }
+/* ****************************************
+ * Assign Role to Account
+ * *************************************** */
+async function assignRole(req, res) {
+  const { account_id, role } = req.body;
+
+  const result = await accountModel.assignRole(account_id, role);
+  if (result) {
+    req.flash("notice", "Role assigned successfully.");
+    return res.redirect("/account/management");
+  } else {
+    req.flash("notice", "Failed to assign role.");
+    return res.redirect("/account/management");
+  }
+}
+
+module.exports = { 
+  buildLogin, 
+  buildRegister, 
+  buildManagement, 
+  buildUpdateView, 
+  registerAccount, 
+  accountLogin, 
+  logout,
+  assignRole
+}

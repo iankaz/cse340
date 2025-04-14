@@ -83,11 +83,26 @@ async function updatePassword(account_id, account_password) {
   }
 }
 
+/* *****************************
+ * Assign Role to Account
+ * *************************** */
+async function assignRole(account_id, role) {
+  try {
+    const sql = "UPDATE account SET account_type = $1 WHERE account_id = $2 RETURNING *"
+    const result = await pool.query(sql, [role, account_id])
+    return result.rows[0]
+  } catch (error) {
+    console.error("Error in assignRole:", error)
+    return null
+  }
+}
+
 module.exports = { 
   accountRegister,
   checkExistingEmail,
   getAccountByEmail,
   getAccountById,
   updateAccount,
-  updatePassword
+  updatePassword,
+  assignRole
 }

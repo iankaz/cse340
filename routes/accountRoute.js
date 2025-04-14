@@ -53,6 +53,12 @@ router.post("/update-password",
   utilities.handleErrors(accountController.updatePassword)
 )
 
+// POST route for assigning roles
+router.post("/assign-role",
+  utilities.checkJWTToken,
+  utilities.handleErrors(accountController.assignRole)
+)
+
 // Route to process logout
 router.get("/logout",
   utilities.handleErrors(accountController.logout)
