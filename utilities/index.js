@@ -81,6 +81,7 @@ Util.buildVehicleDetail = async function (vehicle) {
                <p><strong>Price:</strong> $${new Intl.NumberFormat("en-US").format(vehicle.inv_price)}</p>
                <p><strong>Mileage:</strong> ${new Intl.NumberFormat("en-US").format(vehicle.inv_miles)} miles</p>
                <p><strong>Description:</strong> ${vehicle.inv_description}</p>
+               <button id="add-to-cart-detail" data-id="${vehicle.inv_id}">Add to Cart</button>
              </div>`;
   detail += `</div>`;
   return detail;

@@ -4,6 +4,64 @@ const utilities = require("../utilities/index");
 
 const invCont = {};
 
+// Add item to cart
+invCont.addToCart = function (req, res, next) {
+  const invId = req.body.inv_id;
+  console.log("Add to Cart request received for invId:", invId);
+  if (!invId) {
+    return res.status(400).json({ error: "Inventory ID is required" });
+  }
+  if (!req.session.cart) {
+    req.session.cart = {};
+  }
+  if (req.session.cart[invId]) {
+    req.session.cart[invId] += 1;
+  } else {
+    req.session.cart[invId] = 1;
+  }
+  console.log("Updated cart:", req.session.cart);
+  res.json({ message: "Item added to cart", cart: req.session.cart });
+};
+
+// Remove item from cart
+invCont.removeFromCart = function (req, res, next) {
+  const invId = req.body.inv_id;
+  if (!invId || !req.session.cart || !req.session.cart[invId]) {
+    return res.status(400).json({ error: "Item not found in cart" });
+  }
+  delete req.session.cart[invId];
+  res.json({ message: "Item removed from cart", cart: req.session.cart });
+};
+
+// View cart contents
+invCont.viewCart = async function (req, res, next) {
+  try {
+    const cart = req.session.cart || {};
+    const invIds = Object.keys(cart);
+    let cartItems = [];
+    if (invIds.length > 0) {
+      cartItems = await Promise.all(
+        invIds.map(async (id) => {
+          const invIdInt = parseInt(id);
+          const item = await invModel.getInventoryById(invIdInt);
+          return {
+            ...item,
+            quantity: cart[id],
+          };
+        })
+      );
+    }
+    const nav = await utilities.getNav();
+    res.render("inventory/cart", {
+      title: "Shopping Cart",
+      nav,
+      cartItems,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 // Function to build inventory by classification view
 invCont.buildByClassificationId = async function (req, res, next) {
   try {

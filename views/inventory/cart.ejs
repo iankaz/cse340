@@ -1,0 +1,45 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navigation', { nav: nav }) %>
+
+<h1><%= title %></h1>
+
+<% if (cartItems.length === 0) { %>
+  <p>Your shopping cart is empty.</p>
+<% } else { %>
+  <table>
+    <thead>
+      <tr>
+        <th>Vehicle</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Subtotal</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% let total = 0; %>
+      <% cartItems.forEach(function(item) { %>
+        <% let subtotal = item.inv_price * item.quantity; %>
+        <% total += subtotal; %>
+        <tr>
+          <td><%= item.inv_make %> <%= item.inv_model %></td>
+          <td><%= item.quantity %></td>
+          <td>$<%= item.inv_price.toFixed(2) %></td>
+          <td>$<%= subtotal.toFixed(2) %></td>
+          <td>
+            <form method="POST" action="/inv/cart/remove" style="display:inline;">
+              <input type="hidden" name="inv_id" value="<%= item.inv_id %>">
+              <button type="submit">Remove</button>
+            </form>
+          </td>
+        </tr>
+      <% }); %>
+      <tr>
+        <td colspan="3" style="text-align:right;"><strong>Total:</strong></td>
+        <td colspan="2"><strong>$<%= total.toFixed(2) %></strong></td>
+      </tr>
+    </tbody>
+  </table>
+<% } %>
+
+<%- include('../partials/footer') %>

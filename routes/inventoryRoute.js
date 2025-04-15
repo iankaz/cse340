@@ -72,4 +72,10 @@ router.post(
   utilities.handleErrors(invController.deleteInventory)
 );
 
+// Shopping cart routes
+router.get("/cart", invController.viewCart);
+router.post("/cart/add", invController.addToCart);
+router.post("/cart/remove", invController.removeFromCart);
+
+
 module.exports = router;
