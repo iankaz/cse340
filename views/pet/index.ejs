@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <h1>Your Virtual Pets</h1>
+  <% if (pets && pets.length > 0) { %>
+    <% pets.forEach(function(pet) { %>
+      <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+        <h2><%= pet.pet_name %></h2>
+        <p>Level: <%= pet.level %></p>
+        <p>Hunger: <%= pet.hunger %> / 100</p>
+        <p>Happiness: <%= pet.happiness %> / 100</p>
+        <p>Last Fed: <%= pet.last_fed ? new Date(pet.last_fed).toLocaleString() : "Never" %></p>
+        <p>Last Played: <%= pet.last_played ? new Date(pet.last_played).toLocaleString() : "Never" %></p>
+
+        <form action="/pet/feed" method="POST" style="display:inline;">
+          <input type="hidden" name="petId" value="<%= pet.pet_id %>" />
+          <button type="submit">Feed</button>
+        </form>
+
+        <form action="/pet/play" method="POST" style="display:inline;">
+          <input type="hidden" name="petId" value="<%= pet.pet_id %>" />
+          <button type="submit">Play</button>
+        </form>
+
+        <form action="/pet/levelup" method="POST" style="display:inline;">
+          <input type="hidden" name="petId" value="<%= pet.pet_id %>" />
+          <button type="submit">Level Up</button>
+        </form>
+
+        <form action="/pet/rename" method="POST" style="display:inline;">
+          <input type="hidden" name="petId" value="<%= pet.pet_id %>" />
+          <input type="text" name="newName" placeholder="New name" required />
+          <button type="submit">Rename</button>
+        </form>
+
+        <form action="/pet/sleep" method="POST" style="display:inline;">
+          <input type="hidden" name="petId" value="<%= pet.pet_id %>" />
+          <button type="submit">Put to Sleep</button>
+        </form>
+      </div>
+    <% }); %>
+  <% } else { %>
+    <p>You have no pets yet.</p>
+  <% } %>
+  <p><a href="/">Back to Home</a></p>
+</body>
+</html>

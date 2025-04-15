@@ -9,6 +9,7 @@ const expressLayouts = require("express-ejs-layouts");
 const baseController = require("./controllers/baseController");
 const inventoryRoute = require("./routes/inventoryRoute");
 const accountRoute = require("./routes/accountRoute");
+const petRoute = require("./routes/petRoute");
 const utilities = require("./utilities/index");
 const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser")
@@ -65,6 +66,9 @@ app.use("/inv", inventoryRoute);
 
 // Account routes
 app.use("/account", accountRoute);
+
+// Pet routes
+app.use("/pet", petRoute);
 
 // Protected routes example
 app.get("/protected", authMiddleware.isAuthenticated, (req, res) => {
