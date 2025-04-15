@@ -42,6 +42,7 @@
           <input type="hidden" name="petId" value="<%= pet.pet_id %>" />
           <button type="submit">Put to Sleep</button>
         </form>
+        <a href="/pet/<%= pet.pet_id %>/achievements" style="margin-left: 10px;">View Achievements</a>
       </div>
     <% }); %>
   <% } else { %>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <h1><%= pet.pet_name %> - Achievements</h1>
+
+  <% if (achievements && achievements.length > 0) { %>
+    <ul>
+      <% achievements.forEach(function(achievement) { %>
+        <li>
+          <strong><%= achievement.achievement_name %></strong> - 
+          <%= achievement.date_earned ? new Date(achievement.date_earned).toLocaleDateString() : "Unknown date" %>
+        </li>
+      <% }); %>
+    </ul>
+  <% } else { %>
+    <p>No achievements yet.</p>
+  <% } %>
+
+  <h2>Add New Achievement</h2>
+  <form action="/pet/<%= pet.pet_id %>/achievements" method="POST">
+    <input type="text" name="achievementName" placeholder="Achievement name" required />
+    <button type="submit">Add Achievement</button>
+  </form>
+
+  <p><a href="/pet">Back to Pets</a></p>
+</body>
+</html>

@@ -25,4 +25,10 @@ router.post("/rename", petController.renamePet);
 // Route to put the pet to sleep
 router.post("/sleep", petController.putPetToSleep);
 
+// Route to view pet achievements
+router.get("/:petId/achievements", petController.viewAchievements);
+
+// Route to add a new achievement
+router.post("/:petId/achievements", petController.addAchievement);
+
 module.exports = router;

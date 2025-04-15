@@ -1,5 +1,6 @@
 // controllers/petController.js
 const petModel = require("../models/pet-model");
+const petAchievementModel = require("../models/petAchievement-model");
 const utilities = require("../utilities/index");
 
 const petController = {};
@@ -100,6 +101,40 @@ petController.putPetToSleep = async (req, res) => {
   } catch (error) {
     console.error("Error in putPetToSleep:", error);
     res.status(500).render("errors/error", { title: "Error", message: "Unable to put pet to sleep." });
+  }
+};
+
+petController.viewAchievements = async (req, res) => {
+  try {
+    const petId = req.params.petId;
+    const pet = await petModel.getPetById(petId);
+    if (!pet) {
+      return res.status(404).render("errors/error", { title: "Error", message: "Pet not found." });
+    }
+    const achievements = await petAchievementModel.getAchievementsByPetId(petId);
+    res.render("pet/achievements", { title: `${pet.pet_name} Achievements`, pet, achievements });
+  } catch (error) {
+    console.error("Error in viewAchievements:", error);
+    res.status(500).render("errors/error", { title: "Error", message: "Unable to load achievements." });
+  }
+};
+
+petController.addAchievement = async (req, res) => {
+  try {
+    const petId = req.params.petId;
+    const achievementName = req.body.achievementName;
+    if (!achievementName || achievementName.trim() === "") {
+      return res.status(400).render("errors/error", { title: "Error", message: "Achievement name is required." });
+    }
+    const pet = await petModel.getPetById(petId);
+    if (!pet) {
+      return res.status(404).render("errors/error", { title: "Error", message: "Pet not found." });
+    }
+    await petAchievementModel.addAchievement(petId, achievementName.trim());
+    res.redirect(`/pet/${petId}/achievements`);
+  } catch (error) {
+    console.error("Error in addAchievement:", error);
+    res.status(500).render("errors/error", { title: "Error", message: "Unable to add achievement." });
   }
 };
 
